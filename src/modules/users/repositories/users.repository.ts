@@ -26,8 +26,14 @@ export class UsersRepository{
     updateUserById(id:string,data:UpdateUserDto){
         const user=this.users.find(user=>user.id== id );
 
-        user.name=data.name;
-        user.email=data.email;
+        for(const key in data){
+            user[key]=data[key];
+        }
+
         return user;
+    }
+    deleteUserById(id: string){
+        const index=this.users.findIndex((user)=> user.id == id);
+        this.users.splice(index,1);
     }
 }

@@ -1,0 +1,9 @@
+Get https://animated-umbrella-v66j4455rwr7fpqj6-3000.app.github.dev/users
+
+###
+Post https://animated-umbrella-v66j4455rwr7fpqj6-3000.app.github.dev/users
+content-type: application/json
+{
+    "name":"romilton",
+    "email":"costa@gmail.com"
+}

@@ -18,4 +18,7 @@ constructor(private readonly repository:UsersRepository){}
     update(id:string,updateuserdto:UpdateUserDto){
         return this.repository.updateUserById(id,updateuserdto);
     }
+    delete(id:string){
+        return this.repository.deleteUserById(id);
+    }
 }
