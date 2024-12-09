@@ -11,6 +11,7 @@ export class UsersController{
     constructor(private readonly userservice:UsersService){}
 
     @Post()
+
     @ApiDocGenericPost('user-create',CreateUserDto)
    async create(@Body() body:CreateUserDto){
         return await this.userservice.create(body);
@@ -28,5 +29,6 @@ export class UsersController{
     @Delete(':id')
    async remove(@Param('id') id:string ){
         return await this.userservice.delete(id);
-    }
+   }
+
 }

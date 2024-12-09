@@ -8,6 +8,7 @@ export class CreateUserDto{
 })
 @IsString()
  name:string;
+
  @IsEmail()
  @ApiProperty({
     description:'user email',
