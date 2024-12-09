@@ -2,7 +2,12 @@ import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/commo
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dtos/create-user.dto";
 import { UpdateUserDto } from "./dtos/update-user.dto";
+<<<<<<< HEAD
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+=======
+import {  ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiDocGenericPost } from "src/app/common/api-doc-post-generic.decorator";
+>>>>>>> 5cfd7df (feat: add prisma)
 
 @Controller('users')
 @ApiTags('users')
@@ -10,6 +15,7 @@ export class UsersController{
     constructor(private readonly userservice:UsersService){}
 
     @Post()
+<<<<<<< HEAD
     @ApiOperation({summary:'Criar novos users'})
     @ApiResponse({status:201,description:'novo user criado com sucesso'})
     @ApiResponse({status:400,description:'Parametros invalidos'})
@@ -38,5 +44,24 @@ export class UsersController{
     @ApiResponse({status:400,description:'parametros invalidos'})
     remove(@Param('id') id:string ){
         return this.userservice.delete(id);
+=======
+    @ApiDocGenericPost('user-create',CreateUserDto)
+   async create(@Body() body:CreateUserDto){
+        return await this.userservice.create(body);
+    }
+
+    @Get()
+   async findAll(){
+        return await this.userservice.findAll();
+    }
+    
+    @Patch(':id')
+    async update(@Param('id') id: string, @Body() body :UpdateUserDto){
+        return await this.userservice.update(id,body);
+    }
+    @Delete(':id')
+   async remove(@Param('id') id:string ){
+        return await this.userservice.delete(id);
+>>>>>>> 5cfd7df (feat: add prisma)
     }
 }
