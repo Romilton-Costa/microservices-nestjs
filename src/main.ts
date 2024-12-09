@@ -1,19 +1,17 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ConfigService } from '@nestjs/config';
+import { addSwagger } from './app/config/swagger.config';
+import { ValidationPipe } from '@nestjs/common';
 
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+  const configService=app.get<ConfigService>(ConfigService);
 
-
-  const config = new DocumentBuilder()
-    .setTitle('microservices com nestjs')
-    .setVersion('1.0')
-    .build();
-  const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('swagger', app, documentFactory);
-
+  const PORT=configService.get<number>('PORT')
+  addSwagger(app);
+  app.useGlobalPipes(new ValidationPipe());
+  await app.listen(PORT,()=>console.warn(`server in running in localhost:${PORT}`));
 }
 bootstrap();
